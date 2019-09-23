@@ -1,0 +1,49 @@
+<!--
+ * @Autor: ErioY
+ * @Date: 2019-09-22 15:05:53
+ * @Email: 1973545559@qq.com
+ * @Github: https://github.com/ErioY
+ * @LastEditors: ErioY
+ * @LastEditTime: 2019-09-22 15:32:51
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 先将伪数组转换成数组，并在它的构造器的原型上添加一个`numSort`方法，该方法按照数组的数字大小进行正序排列(提示：不用`sort`方法，用冒泡排序)，
+    // 并且指出在转换之前它的构造器是谁，转换之后构造器又是谁？
+    // 伪数组(类数组)
+    var arr = {
+        "0":111,
+        "1":22,
+        "2":3,
+        "length":3
+    };  
+    console.log(arr.__proto__); // 输出类数组构造器原型 => object
+    arr = Array.prototype.slice.call(arr); // 伪数组转换为数组
+    console.log(arr.__proto__); // 输出数组构造器原型 => array
+    Array.prototype.numSort = function () {
+        // 冒泡排序
+        for (var i = 0; i < this.length - 1; i++) {
+            for (var j = 0; j < this.length - 1 -i; j++) {
+                if (this[j] > this[j+1]) {
+                    var temp = this[j];
+                    this[j] = this[j+1];
+                    this[j+1] = temp; 
+                } 
+            }
+        }
+        console.log(this);
+    }
+    arr.numSort();
+    var arr1 = [1,4,3,2,8,0,9];
+    arr1.numSort();
+    </script>
+</body>
+</html>
